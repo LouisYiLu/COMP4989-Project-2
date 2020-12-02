@@ -32,9 +32,9 @@ def main():
     data = pd.get_dummies(data, columns=['CountryName'],
                           prefix=['CountryName'])
 
-    for (colName, colData) in data.iteritems():
-        if "countryname" in colName.lower():
-            data.drop(colName, axis=1, inplace=True)
+    # for (colName, colData) in data.iteritems():
+    #     if "countryname" in colName.lower():
+    #         data.drop(colName, axis=1, inplace=True)
     print(data.info())
 
 
