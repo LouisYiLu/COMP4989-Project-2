@@ -32,6 +32,7 @@ def plot_indices_vs_cases(country):
         data_country_index.plot(subplots=True)
         plt.title(f"{index.value} VS Daily Cases in {country}")
         plt.show()
+        plt.savefig(f'./gilpin/figures/{country}_{index.value}.png')
 
 
 # ======= CANADA ========
