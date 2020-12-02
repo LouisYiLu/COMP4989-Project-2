@@ -8,7 +8,7 @@ import datetime as dt
 
 
 def main():
-    data = pd.read_csv('../complete.csv')
+    data = pd.read_csv('../complete_new_version.csv')
     data.drop("CountryCode", axis=1, inplace=True)
     data.drop("RegionName", axis=1, inplace=True)
     data.drop("RegionCode", axis=1, inplace=True)
@@ -25,7 +25,7 @@ def main():
     data.dropna(axis=0, how='any', inplace=True)
 
     # change datatype of Date from int to DateTime64
-    date_series = pd.to_datetime(data['Date'].astype(str), format='%Y%m%d')
+    date_series = pd.to_datetime(data['Date'])
     data['Date'] = date_series.map(dt.datetime.toordinal)
 
     # encoding country name
@@ -39,10 +39,9 @@ def main():
 
 
     # separate feature and label
-    data_feature = data.drop(['ConfirmedCases', 'number_of_cases_each_day', 'ConfirmedDeaths'], axis=1, inplace=False)
-    data_label_total_cases = data.loc[:, 'ConfirmedCases']
-    data_label_total_deaths = data.loc[:, 'ConfirmedDeaths']
-    data_label_cases_perDay = data.loc[:, 'number_of_cases_each_day']
+    data_feature = data.drop(['ConfirmedCases', 'ConfirmedDeaths',
+                              'new_cases'], axis=1, inplace=False)
+    data_label_cases_perDay = data.loc[:, 'new_cases']
 
     X_train, X_test, y_train, y_test = train_test_split(data_feature,
                                                         data_label_cases_perDay,
