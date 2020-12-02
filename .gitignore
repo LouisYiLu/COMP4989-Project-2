@@ -130,3 +130,6 @@ dmypy.json
 
 #PyCharm
 .idea/
+
+#hella big csv file
+datasets_resource/Global_Mobility_Report.csv

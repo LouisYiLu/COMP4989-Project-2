@@ -27,6 +27,7 @@ def main():
     # change datatype of Date from int to DateTime64
     date_series = pd.to_datetime(data['Date'].astype(str), format='%Y%m%d')
     data['Date'] = date_series.map(dt.datetime.toordinal)
+
     # encoding country name
     data = pd.get_dummies(data, columns=['CountryName'],
                           prefix=['CountryName'])
