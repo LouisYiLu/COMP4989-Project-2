@@ -54,7 +54,7 @@ def main():
     data = pd.read_csv("complete.csv")
 
     # Important Columns: CountryCode, Date, C1 to C8, H1 to H6, ConfirmedCases, ConfirmedDeaths, ContainmentHealthIndex
-    data = data[['C1_School closing', 'C2_Workplace closing',
+    data = data[["CountryName", "Date", 'C1_School closing', 'C2_Workplace closing',
                  'C3_Cancel public events', 'C4_Restrictions on gatherings',
                  'C5_Close public transport', 'C6_Stay at home requirements',
                  'C7_Restrictions on internal movement',
@@ -63,9 +63,9 @@ def main():
                  'E4_International support', 'H1_Public information campaigns',
                  'H2_Testing policy', 'H3_Contact tracing',
                  'H4_Emergency investment in healthcare', 'H5_Investment in vaccines',
-                 'H6_Facial Coverings', "CountryName", "Date", 'ConfirmedCases',
-                 'number_of_cases_each_day', 'ConfirmedDeaths', "StringencyIndex",
-                 "GovernmentResponseIndex", 'ContainmentHealthIndex', 'EconomicSupportIndex']]
+                 'H6_Facial Coverings', "StringencyIndex",
+                 "GovernmentResponseIndex", 'ContainmentHealthIndex', 'EconomicSupportIndex'
+                 'ConfirmedCases', 'number_of_cases_each_day', 'ConfirmedDeaths']]
 
     # Format Date
     data['Date'] = pd.to_datetime(data['Date'], format='%Y%m%d')
