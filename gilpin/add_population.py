@@ -3,7 +3,8 @@ import os
 import numpy as np
 
 # Complete CSV
-data = pd.read_csv(os.path.abspath('../complete.csv'))
+data = pd.read_csv(os.path.abspath('../complete_new_version.csv'))
+data = data.drop('Unnamed: 0', axis=1)
 
 # Get & Format Population Data
 populations = pd.read_csv(
@@ -32,4 +33,4 @@ for country in populations.index:
     data.loc[data['CountryName'] == country, 'UrbanPercentage'] = populations.loc[country, 'UrbanPercentage']
 
 # SAVE DATA TO CSV
-data.to_csv(os.path.abspath('complete_with_population.csv'))
+data.to_csv(os.path.abspath('../complete_new_version_with_population.csv'))
