@@ -132,7 +132,7 @@ def main():
     result = pd.merge(policy_data, mobility_data, on=['CountryName', 'Date'])
     result = pd.merge(result, covid_track_data, on=['CountryName', 'Date'])
 
-    result.to_csv("complete.csv")
+    result.to_csv("../complete_new_version.csv")
 
 
 if __name__ == '__main__':
