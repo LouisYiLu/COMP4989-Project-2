@@ -56,8 +56,8 @@ def plot_indices_vs_cases(data_country, country, index_enum):
 def main():
     # Read all data from CSV
     data = pd.read_csv(os.path.abspath("../complete_new_version_with_population.csv"))
-    population_data = pd.read_csv(os.path.abspath("../datasets_resource/population_by_country_2020.csv"))
-    population_data = population_data.set_index("Country (or dependency)")
+    population_data = pd.read_csv(os.path.abspath("../complete_new_version_with_population.csv"))
+    population_data = population_data.set_index("CountryName")
     countries = list(population_data.index)
 
     # Format Date
