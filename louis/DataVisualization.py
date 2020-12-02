@@ -21,10 +21,9 @@ def barChart(feature_name, feature):
 
 
 def main():
-    data = pd.read_csv("../complete.csv")
+    data = pd.read_csv("../complete_new_version.csv")
     features_dict = {}
-    case_label = data.loc[:, 'ConfirmedCases']
-    case_changed_label = data.loc[:, 'number_of_cases_each_day']
+    case_label = data.loc[:, 'new_cases']
     death_label = data.loc[:, 'ConfirmedDeaths']
 
     features_dict['school_closing'] = data.loc[:, 'C1_School closing']
