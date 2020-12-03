@@ -9,7 +9,7 @@ import datetime as dt
 
 
 def main():
-    data = pd.read_csv('../complete_new_version.csv')
+    data = pd.read_csv('dataset/complete.csv')
     data.drop("CountryCode", axis=1, inplace=True)
     data.drop("RegionName", axis=1, inplace=True)
     data.drop("RegionCode", axis=1, inplace=True)
@@ -72,6 +72,7 @@ def main():
     score_dict = {RFR: RFR_mae, XGBR: XGBR_mae, ExtraTR: ExtraTR_mae, LinR: LinR_mae}
     print("Linear Regression cross validation done")
     final_model = max(score_dict, key=score_dict.get)
+
 
     final_model.fit(X_train, y_train)
     y_pred = final_model.predict(X_test)
