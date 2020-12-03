@@ -26,7 +26,7 @@ File Explanation
 - StackingRegressor.py was not used in FinalModelSelection. It takes too long to run even without cross validation for
   parameter tuning.
 
-- Final ModelSelection
+- Final ModelSelection.py
     - Cross validation for model selection has been commented out as it's taking long time.
     - Output:
     `# Final Model is the best model result from corss validation`

@@ -69,10 +69,10 @@ def main():
     #                               scoring='neg_mean_absolute_error')['test_score'])
     # score_dict = {RFR: RFR_mae, XGBR: XGBR_mae, ExtraTR: ExtraTR_mae, LinR: LinR_mae}
     # print("Linear Regression cross validation done")
+    # print(score_dict)
 
     final_model = XGBRegressor(learning_rate=0.1, max_depth=9, n_estimators=350)
     # final_model = max(score_dict, key=score_dict.get)
-    print(final_model)
     final_model.fit(X_train, y_train)
     y_pred = final_model.predict(X_test)
     mae = np.mean(abs(y_test - y_pred))
