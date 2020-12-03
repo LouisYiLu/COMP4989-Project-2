@@ -132,4 +132,4 @@ dmypy.json
 .idea/
 
 #hella big csv file
-datasets_resource/Global_Mobility_Report.csv
+Global_Mobility_Report.csv
