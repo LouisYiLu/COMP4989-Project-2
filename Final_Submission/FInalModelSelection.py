@@ -1,8 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split, cross_validate
-from sklearn.ensemble import RandomForestRegressor, ExtraTreesRegressor, StackingRegressor, GradientBoostingRegressor
-from sklearn.svm import LinearSVR
+from sklearn.ensemble import RandomForestRegressor, ExtraTreesRegressor
 from sklearn.linear_model import LinearRegression
 from xgboost import XGBRegressor
 import datetime as dt
@@ -49,29 +48,30 @@ def main():
                                                         test_size=0.25,
                                                         random_state=42)
     # Cross Validation to select model (taking long time, see the result in the block-comment below)
+    # RFR = RandomForestRegressor(n_estimators=300, random_state=42)
+    # XGBR = XGBRegressor(objective="reg:squarederror",
+    #                     random_state=42,
+    #                     learning_rate=0.1,
+    #                     max_depth=9,
+    #                     n_estimators=350)
+    # ExtraTR = ExtraTreesRegressor(n_estimators=300, random_state=42)
+    # LinR = LinearRegression()
+    # RFR_mae = max(cross_validate(RFR, X_train, y_train, cv=5,
+    #                              scoring='neg_mean_absolute_error')['test_score'])
+    # print("Random Forest cross validation done")
+    # ExtraTR_mae = max(cross_validate(XGBR, X_train, y_train, cv=5,
+    #                                  scoring='neg_mean_absolute_error')['test_score'])
+    # print("Extra Tree cross validation done")
+    # XGBR_mae = max(cross_validate(ExtraTR, X_train, y_train, cv=5,
+    #                               scoring='neg_mean_absolute_error')['test_score'])
+    # print("XGBoost cross validation done")
+    # LinR_mae = max(cross_validate(LinR, X_train, y_train, cv=5,
+    #                               scoring='neg_mean_absolute_error')['test_score'])
+    # score_dict = {RFR: RFR_mae, XGBR: XGBR_mae, ExtraTR: ExtraTR_mae, LinR: LinR_mae}
+    # print("Linear Regression cross validation done")
 
-    RFR = RandomForestRegressor(random_state=42)
-    XGBR = XGBRegressor(objective="reg:squarederror",
-                        random_state=42,
-                        learning_rate=0.1,
-                        max_depth=9,
-                        n_estimators=350)
-    ExtraTR = ExtraTreesRegressor(random_state=42)
-    LinR = LinearRegression()
-    RFR_mae = max(cross_validate(RFR, X_train, y_train, cv=10,
-                                 scoring='neg_mean_absolute_error')['test_score'])
-    print("Random Forest cross validation done")
-    ExtraTR_mae = max(cross_validate(XGBR, X_train, y_train, cv=10,
-                                     scoring='neg_mean_absolute_error')['test_score'])
-    print("Extra Tree cross validation done")
-    XGBR_mae = max(cross_validate(ExtraTR, X_train, y_train, cv=10,
-                                  scoring='neg_mean_absolute_error')['test_score'])
-    print("XGBoost cross validation done")
-    LinR_mae = max(cross_validate(LinR, X_train, y_train, cv=10,
-                                  scoring='neg_mean_absolute_error')['test_score'])
-    score_dict = {RFR: RFR_mae, XGBR: XGBR_mae, ExtraTR: ExtraTR_mae, LinR: LinR_mae}
-    print("Linear Regression cross validation done")
-    final_model = max(score_dict, key=score_dict.get)
+    final_model = XGBRegressor(learning_rate=0.1, max_depth=9, n_estimators=350)
+    # final_model = max(score_dict, key=score_dict.get)
     print(final_model)
     final_model.fit(X_train, y_train)
     y_pred = final_model.predict(X_test)
