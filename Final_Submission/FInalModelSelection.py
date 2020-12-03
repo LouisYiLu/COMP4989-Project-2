@@ -9,12 +9,12 @@ import datetime as dt
 
 
 def main():
-    data = pd.read_csv('dataset/complete.csv')
+    data = pd.read_csv('dataset/complete_with_population.csv')
     data.drop("CountryCode", axis=1, inplace=True)
     data.drop("RegionName", axis=1, inplace=True)
     data.drop("RegionCode", axis=1, inplace=True)
     data.drop("M1_Wildcard", axis=1, inplace=True)
-
+    data = data.loc[:, ~data.columns.str.contains('^Unnamed')]
     # Remove Flag Columns
     for (colName, colData) in data.iteritems():
         if "flag" in colName.lower():
@@ -72,8 +72,7 @@ def main():
     score_dict = {RFR: RFR_mae, XGBR: XGBR_mae, ExtraTR: ExtraTR_mae, LinR: LinR_mae}
     print("Linear Regression cross validation done")
     final_model = max(score_dict, key=score_dict.get)
-
-
+    print(final_model)
     final_model.fit(X_train, y_train)
     y_pred = final_model.predict(X_test)
     mae = np.mean(abs(y_test - y_pred))

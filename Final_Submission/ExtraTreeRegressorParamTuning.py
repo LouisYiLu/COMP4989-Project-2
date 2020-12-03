@@ -20,6 +20,7 @@ def main():
         if "index" in colName.lower():
             data.drop(colName, axis=1, inplace=True)
 
+    data = data.fillna(method='ffill')
     # remove any rows that contain 'nan'
     data.dropna(axis=0, how='any', inplace=True)
 
@@ -46,15 +47,13 @@ def main():
                                                         test_size=0.25,
                                                         random_state=42)
     # Parameters tuning (Note: taking long time)
-    """
     EXTR = ExtraTreesRegressor(random_state=42)
-    n_estimators = [50, 150, 200, 250, 300, 350]
+    n_estimators = [50, 100, 150, 200, 250, 300]
     param_grid = dict(n_estimators=n_estimators)
     kfold = KFold(n_splits=10, random_state=7, shuffle=True)
     grid_search = GridSearchCV(EXTR, param_grid, scoring="neg_mean_absolute_error", n_jobs=-1, cv=kfold)
     grid_result = grid_search.fit(X_train, y_train)
     print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
-    """
 
     EXTR = ExtraTreesRegressor(n_estimators=50, random_state=42)
     EXTR.fit(X_train, y_train)
